@@ -1,0 +1,342 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background: radial-gradient(circle at top, #14161b 0%, #090a0d 55%, #050608 100%);
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 390px;
+    height: 96vh;
+    max-height: 920px;
+    background: linear-gradient(180deg, #090b10 0%, #06070b 100%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 34px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: #ec944c;
+    font-size: 24px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:hover {
+    opacity: 0.8;
+}
+
+.app-title {
+    font-size: 46px;
+    font-weight: 700;
+    color: #ec944c;
+    letter-spacing: 1px;
+}
+
+.content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+}
+
+.tab {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.tab.active {
+    display: flex;
+}
+
+#calculator-tab {
+    padding: 0;
+    flex-direction: column;
+}
+
+.display-section {
+    padding: 36px 20px 24px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.operation-display {
+    font-size: 18px;
+    color: #999;
+    min-height: 24px;
+    margin-bottom: 8px;
+    font-weight: 300;
+}
+
+.result-display {
+    font-size: 74px;
+    font-weight: 700;
+    color: #fff;
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 1;
+}
+
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 14px;
+    flex: 1;
+    background: linear-gradient(180deg, rgba(10, 12, 18, 0.95) 0%, rgba(6, 8, 12, 0.98) 100%);
+    border-radius: 28px;
+    margin: 0 10px 10px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+.btn {
+    min-height: 76px;
+    border: none;
+    border-radius: 18px;
+    font-size: 24px;
+    font-weight: 600;
+    background: #1a1d22;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn:hover {
+    background: #20252d;
+}
+
+.btn-function {
+    background: #4c5055;
+    color: #fff;
+}
+
+.btn-function:hover {
+    background: #5a5f65;
+}
+
+.btn-operation {
+    background: #4f2e21;
+    color: #ec944c;
+}
+
+.btn-operation:hover {
+    background: #5d3829;
+}
+
+.btn-equals {
+    background: #ec944c;
+    color: #1a130c;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.btn-equals:hover {
+    background: #f3a360;
+}
+
+.btn-zero {
+    grid-column: span 2;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 8px 10px 0;
+}
+
+.history-header h2 {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.clear-btn {
+    background: #23262c;
+    color: #d6d6d8;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.clear-btn i {
+    color: #ec944c;
+}
+
+.clear-btn:hover {
+    background: #2a2f37;
+}
+
+.activity-log {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 10px 90px;
+}
+
+.activity-section {
+    margin-bottom: 20px;
+}
+
+.section-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.history-item {
+    background: linear-gradient(180deg, #0f1218 0%, #0b0d12 100%);
+    padding: 22px;
+    border-radius: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 170px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.history-time {
+    font-size: 12px;
+    color: #999;
+}
+
+.history-operation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.history-expression {
+    font-size: 46px;
+    color: #8d8f95;
+    line-height: 1;
+}
+
+.history-result {
+    font-size: 68px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+}
+
+.settings-content {
+    padding: 20px 0;
+}
+
+.settings-content h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #080a0f;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 14px 12px 20px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #9e9fa4;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    transition: color 0.2s, background 0.2s;
+    border-radius: 999px;
+    min-width: 112px;
+}
+
+.nav-btn .nav-icon {
+    font-size: 26px;
+}
+
+.nav-btn .nav-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.nav-btn.active {
+    color: #ec944c;
+    background: #1d2025;
+}
+
+.nav-btn:hover {
+    color: #ec944c;
+}
+.content::-webkit-scrollbar,
+.activity-log::-webkit-scrollbar {
+    width: 4px;
+}
+
+.content::-webkit-scrollbar-track,
+.activity-log::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.content::-webkit-scrollbar-thumb,
+.activity-log::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb:hover,
+.activity-log::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}

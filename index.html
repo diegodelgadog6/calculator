@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALC - Calculadora</title>
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <button class="icon-btn" type="button" onclick="toggleMenu()" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <h1 class="app-title">CALC</h1>
+            <button class="icon-btn" type="button" onclick="showTab('settings')" aria-label="Settings">
+                <i class="fa-solid fa-gear"></i>
+            </button>
+        </div>
+
+        <div class="content">
+            <div id="calculator-tab" class="tab active">
+                <div class="display-section">
+                    <div class="operation-display" id="operation-display"></div>
+                    <div class="result-display" id="result-display">0</div>
+                </div>
+
+                <div class="buttons-grid">
+                    <button class="btn btn-function" onclick="clearAll()">AC</button>
+                    <button class="btn btn-function" onclick="deleteLast()">✕</button>
+                    <button class="btn btn-function" onclick="handleClick('%')">%</button>
+                    <button class="btn btn-operation" onclick="handleClick('/')">÷</button>
+
+                    <button class="btn" onclick="handleClick(7)">7</button>
+                    <button class="btn" onclick="handleClick(8)">8</button>
+                    <button class="btn" onclick="handleClick(9)">9</button>
+                    <button class="btn btn-operation" onclick="handleClick('*')">✕</button>
+
+                    <button class="btn" onclick="handleClick(4)">4</button>
+                    <button class="btn" onclick="handleClick(5)">5</button>
+                    <button class="btn" onclick="handleClick(6)">6</button>
+                    <button class="btn btn-operation" onclick="handleClick('-')">−</button>
+
+                    <button class="btn" onclick="handleClick(1)">1</button>
+                    <button class="btn" onclick="handleClick(2)">2</button>
+                    <button class="btn" onclick="handleClick(3)">3</button>
+                    <button class="btn btn-operation" onclick="handleClick('+')">+</button>
+
+                    <button class="btn btn-zero" onclick="handleClick(0)">0</button>
+                    <button class="btn" onclick="handleClick('.')">.</button>
+                    <button class="btn btn-equals" onclick="calculate()">=</button>
+                </div>
+
+            <!-- HISTORY TAB -->
+            <div id="history-tab" class="tab">
+                <div class="history-header">
+                    <button class="clear-btn" onclick="clearHistory()"><i class="fa-solid fa-trash-can"></i> Clear All</button>
+                    <button class="clear-btn" onclick="clearHistory()"><i class="fa-solid fa-trash-can" style="color: #ec944c;"></i> Clear All</button>
+                </div>
+                    <!-- History items will be added here -->
+                </div>
+
+            <!-- SETTINGS TAB -->
+            <div id="settings-tab" class="tab">
+                <div class="settings-content">
+                    <h2>Settings</h2>
+                    <p>Configuración disponible</p>
+                </div>
+            </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+                <i class="fa-solid fa-calculator nav-icon"></i>
+                <i class="fa-solid fa-calculator" style="color: #ec944c;"></i>
+                <span class="nav-label">CALCULATOR</span>
+            </button>
+                <i class="fa-solid fa-clock-rotate-left nav-icon"></i>
+                <i class="fa-solid fa-clock-rotate-left" style="color: #ec944c;"></i>
+                <span class="nav-label">HISTORY</span>
+            </button>
+                <i class="fa-solid fa-gear nav-icon"></i>
+                <i class="fa-solid fa-gear" style="color: #ec944c;"></i>
+                <span class="nav-label">SETTINGS</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="./scripts.js"></script>
+</body>
+</html>
