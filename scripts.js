@@ -241,6 +241,3 @@ window.addEventListener('DOMContentLoaded', () => {
     updateHistoryDisplay();
     updateRecentHistory();
 });
-
-
-
