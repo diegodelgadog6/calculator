@@ -154,9 +154,12 @@ function updateRecentHistory() {
 
 function updateHistoryDisplay() {
     const activityLog = document.getElementById('activity-log');
+    if (!activityLog) {
+        return;
+    }
     activityLog.innerHTML = '';
     if (history.length === 0) {
-        activityLog.innerHTML = '<p style="color: #666; text-align: center; padding: 40px 20px;">No hay historial</p>';
+        activityLog.innerHTML = '<p class="text-[#8d8d92] text-center py-10">No hay historial</p>';
         return;
     }
     let currentDate = '';
@@ -164,7 +167,7 @@ function updateHistoryDisplay() {
         if (item.date !== currentDate) {
             currentDate = item.date;
             const section = document.createElement('div');
-            section.className = 'activity-section';
+            section.className = 'pt-2';
             let dateLabel = 'TODAY';
             const today = new Date().toLocaleDateString('es-ES');
             const yesterday = new Date(Date.now() - 86400000).toLocaleDateString('es-ES');
@@ -174,20 +177,20 @@ function updateHistoryDisplay() {
                 dateLabel = 'YESTERDAY';
             }
             const label = document.createElement('div');
-            label.className = 'section-label';
+            label.className = 'text-[#6d6d72] text-xs tracking-[0.16em] font-bold uppercase mb-3';
             label.textContent = dateLabel;
             section.appendChild(label);
             activityLog.appendChild(section);
         }
         const historyItem = document.createElement('div');
-        historyItem.className = 'history-item';
+        historyItem.className = 'bg-[#111317] border border-[#23252a] rounded-[28px] p-6 min-h-[160px] flex items-end justify-between';
         historyItem.innerHTML = `
-            <div>
-                <div class="history-time">${item.time}</div>
+            <div class="self-start">
+                <div class="text-[#6f7177] text-sm">${item.time}</div>
             </div>
-            <div class="history-operation">
-                <div class="history-expression">${item.expression}</div>
-                <div class="history-result">${formatNumber(String(item.result))}</div>
+            <div class="flex flex-col items-end gap-1">
+                <div class="text-[#8f9096] text-[2rem] leading-none">${item.expression}</div>
+                <div class="text-white text-[3.5rem] leading-none font-bold">${formatNumber(String(item.result))}</div>
             </div>
         `;
         activityLog.appendChild(historyItem);
@@ -205,16 +208,24 @@ function clearHistory() {
 
 function showTab(tabName) {
     const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => tab.classList.remove('active'));
+    tabs.forEach(tab => {
+        tab.classList.add('hidden');
+        tab.classList.remove('active');
+    });
     const navBtns = document.querySelectorAll('.nav-btn');
-    navBtns.forEach(btn => btn.classList.remove('active'));
+    navBtns.forEach(btn => {
+        btn.classList.remove('nav-active');
+        btn.classList.add('nav-inactive');
+    });
     const selectedTab = document.getElementById(tabName + '-tab');
     if (selectedTab) {
+        selectedTab.classList.remove('hidden');
         selectedTab.classList.add('active');
     }
     const activeBtn = document.querySelector(`.nav-btn[data-tab="${tabName}"]`);
     if (activeBtn) {
-        activeBtn.classList.add('active');
+        activeBtn.classList.remove('nav-inactive');
+        activeBtn.classList.add('nav-active');
     }
     if (tabName === 'history') {
         updateHistoryDisplay();

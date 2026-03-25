@@ -1,90 +1,138 @@
 <!DOCTYPE html>
-<html lang="es">
+<html class="dark" lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CALC - Calculadora</title>
-    <link rel="stylesheet" href="./styles/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>CALC</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        headline: ['Inter'],
+                        body: ['Inter']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 450, 'GRAD' 0, 'opsz' 24;
+        }
+        .nav-active {
+            background: #20201f;
+            color: #ec944c;
+        }
+        .nav-inactive {
+            color: #adaaaa;
+        }
+    </style>
 </head>
-<body>
-    <div class="app-container">
-        <div class="header">
-            <button class="icon-btn" type="button" onclick="toggleMenu()" aria-label="Menu">
-                <i class="fa-solid fa-bars"></i>
+<body class="bg-[#0e0e0e] text-white font-body min-h-screen flex flex-col">
+    <header class="w-full sticky top-0 z-50 bg-[#0e0e0e]">
+        <div class="max-w-lg mx-auto w-full px-6 py-4 flex justify-between items-center">
+            <button type="button" onclick="toggleMenu()" class="text-[#ec944c] p-2 rounded-full hover:bg-[#20201f] transition-colors">
+                <span class="material-symbols-outlined">menu</span>
             </button>
-            <h1 class="app-title">CALC</h1>
-            <button class="icon-btn" type="button" onclick="showTab('settings')" aria-label="Settings">
-                <i class="fa-solid fa-gear"></i>
+            <h1 class="font-headline font-extrabold tracking-tight text-5xl text-[#ec944c]">CALC</h1>
+            <button type="button" onclick="showTab('settings')" class="text-[#ec944c] p-2 rounded-full hover:bg-[#20201f] transition-colors">
+                <span class="material-symbols-outlined">settings</span>
             </button>
         </div>
+        <div class="h-px bg-[#1f1f1f]"></div>
+    </header>
 
-        <div class="content">
-            <div id="calculator-tab" class="tab active">
-                <div class="display-section">
-                    <div class="operation-display" id="operation-display"></div>
-                    <div class="result-display" id="result-display">0</div>
-                </div>
-
-                <div class="buttons-grid">
-                    <button class="btn btn-function" onclick="clearAll()">AC</button>
-                    <button class="btn btn-function" onclick="deleteLast()">✕</button>
-                    <button class="btn btn-function" onclick="handleClick('%')">%</button>
-                    <button class="btn btn-operation" onclick="handleClick('/')">÷</button>
-
-                    <button class="btn" onclick="handleClick(7)">7</button>
-                    <button class="btn" onclick="handleClick(8)">8</button>
-                    <button class="btn" onclick="handleClick(9)">9</button>
-                    <button class="btn btn-operation" onclick="handleClick('*')">✕</button>
-
-                    <button class="btn" onclick="handleClick(4)">4</button>
-                    <button class="btn" onclick="handleClick(5)">5</button>
-                    <button class="btn" onclick="handleClick(6)">6</button>
-                    <button class="btn btn-operation" onclick="handleClick('-')">−</button>
-
-                    <button class="btn" onclick="handleClick(1)">1</button>
-                    <button class="btn" onclick="handleClick(2)">2</button>
-                    <button class="btn" onclick="handleClick(3)">3</button>
-                    <button class="btn btn-operation" onclick="handleClick('+')">+</button>
-
-                    <button class="btn btn-zero" onclick="handleClick(0)">0</button>
-                    <button class="btn" onclick="handleClick('.')">.</button>
-                    <button class="btn btn-equals" onclick="calculate()">=</button>
-                </div>
-
-            <!-- HISTORY TAB -->
-            <div id="history-tab" class="tab">
-                <div class="history-header">
-                    <button class="clear-btn" onclick="clearHistory()"><i class="fa-solid fa-trash-can"></i> Clear All</button>
-                    <button class="clear-btn" onclick="clearHistory()"><i class="fa-solid fa-trash-can" style="color: #ec944c;"></i> Clear All</button>
-                </div>
-                    <!-- History items will be added here -->
-                </div>
-
-            <!-- SETTINGS TAB -->
-            <div id="settings-tab" class="tab">
-                <div class="settings-content">
-                    <h2>Settings</h2>
-                    <p>Configuración disponible</p>
-                </div>
+    <main class="flex-grow max-w-lg mx-auto w-full px-6 pb-32">
+        <section id="calculator-tab" class="tab flex flex-col">
+            <div class="flex-grow flex flex-col justify-end items-end py-10 space-y-2">
+                <div id="operation-display" class="text-[#a2a2a2] text-xl tracking-tight opacity-80 min-h-7"></div>
+                <div id="result-display" class="text-white text-[5rem] leading-none font-black tracking-[-0.04em]">0</div>
             </div>
 
-        <!-- Bottom Navigation -->
-        <div class="bottom-nav">
-                <i class="fa-solid fa-calculator nav-icon"></i>
-                <i class="fa-solid fa-calculator" style="color: #ec944c;"></i>
-                <span class="nav-label">CALCULATOR</span>
+            <section class="bg-[#131313] p-4 rounded-[2rem] shadow-inner">
+                <div class="grid grid-cols-4 gap-3">
+                    <button onclick="clearAll()" class="bg-[#50545b] text-[#e2e2e2] h-20 rounded-2xl flex items-center justify-center text-xl font-bold active:scale-95 transition-all">AC</button>
+                    <button onclick="deleteLast()" class="bg-[#50545b] text-[#e2e2e2] h-20 rounded-2xl flex items-center justify-center text-xl font-bold active:scale-95 transition-all">
+                        <span class="material-symbols-outlined">backspace</span>
+                    </button>
+                    <button onclick="handleClick('%')" class="bg-[#50545b] text-[#e2e2e2] h-20 rounded-2xl flex items-center justify-center text-xl font-bold active:scale-95 transition-all">%</button>
+                    <button onclick="handleClick('/')" class="bg-[#563225] text-[#ec944c] h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">÷</button>
+
+                    <button onclick="handleClick(7)" class="bg-[#20201f] text-white h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">7</button>
+                    <button onclick="handleClick(8)" class="bg-[#20201f] text-white h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">8</button>
+                    <button onclick="handleClick(9)" class="bg-[#20201f] text-white h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">9</button>
+                    <button onclick="handleClick('*')" class="bg-[#563225] text-[#ec944c] h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">×</button>
+
+                    <button onclick="handleClick(4)" class="bg-[#20201f] text-white h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">4</button>
+                    <button onclick="handleClick(5)" class="bg-[#20201f] text-white h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">5</button>
+                    <button onclick="handleClick(6)" class="bg-[#20201f] text-white h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">6</button>
+                    <button onclick="handleClick('-')" class="bg-[#563225] text-[#ec944c] h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">−</button>
+
+                    <button onclick="handleClick(1)" class="bg-[#20201f] text-white h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">1</button>
+                    <button onclick="handleClick(2)" class="bg-[#20201f] text-white h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">2</button>
+                    <button onclick="handleClick(3)" class="bg-[#20201f] text-white h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">3</button>
+                    <button onclick="handleClick('+')" class="bg-[#563225] text-[#ec944c] h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">+</button>
+
+                    <button onclick="handleClick(0)" class="col-span-2 bg-[#20201f] text-white h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">0</button>
+                    <button onclick="handleClick('.')" class="bg-[#20201f] text-white h-20 rounded-2xl flex items-center justify-center text-2xl font-bold active:scale-95 transition-all">.</button>
+                    <button onclick="calculate()" class="bg-[#ec944c] text-[#1a130c] h-20 rounded-2xl flex items-center justify-center text-3xl font-black shadow-[0_0_20px_rgba(236,148,76,0.32)] active:scale-95 transition-all">=</button>
+                </div>
+            </section>
+
+            <section class="mt-8 space-y-4">
+                <h3 class="text-[#a8a8ae] text-sm font-bold tracking-[0.22em] uppercase px-2">Recent History</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-[#20201f] p-4 rounded-3xl space-y-2 border border-[#2b2b2b]">
+                        <p id="recent-expression" class="text-[#b4b4b9] text-xs font-semibold">Sin operaciones</p>
+                        <p id="recent-result" class="text-white text-5xl leading-none font-bold">0</p>
+                    </div>
+                    <button type="button" onclick="showTab('history')" class="bg-[#151515] p-4 rounded-3xl flex flex-col justify-center items-center border border-[#2b2b2b] hover:bg-[#20201f] transition-colors">
+                        <span class="material-symbols-outlined text-[#ec944c] mb-1">history</span>
+                        <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#b4b4b9]">View All</p>
+                    </button>
+                </div>
+            </section>
+        </section>
+
+        <section id="history-tab" class="tab hidden py-8">
+            <div class="text-[#777] text-sm tracking-[0.2em] uppercase font-bold mb-2">Activity Log</div>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-5xl font-extrabold">History</h2>
+                <button type="button" onclick="clearHistory()" class="bg-[#23262c] text-[#e2e2e2] px-4 py-2 rounded-2xl text-sm font-semibold flex items-center gap-2 hover:bg-[#2a2f37] transition-colors">
+                    <span class="material-symbols-outlined text-[#ec944c] text-base">delete</span>
+                    Clear All
+                </button>
+            </div>
+            <div id="activity-log" class="space-y-4 pb-10"></div>
+        </section>
+
+        <section id="settings-tab" class="tab hidden py-10">
+            <h2 class="text-4xl font-extrabold mb-3">Settings</h2>
+            <p class="text-[#a8a8ae]">Configuracion disponible</p>
+        </section>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 w-full bg-[#0e0e0e] border-t border-[#2a2a2a] rounded-t-[24px] px-4 pb-6 pt-3 z-50">
+        <div class="max-w-lg mx-auto w-full grid grid-cols-[1.2fr_1fr_1fr] gap-2">
+            <button type="button" class="nav-btn nav-active flex flex-col items-center justify-center rounded-[24px] px-4 py-2 transition-all" data-tab="calculator" onclick="showTab('calculator')">
+                <span class="material-symbols-outlined">calculate</span>
+                <span class="text-[11px] font-semibold uppercase tracking-[0.18em] mt-1">Calculator</span>
             </button>
-                <i class="fa-solid fa-clock-rotate-left nav-icon"></i>
-                <i class="fa-solid fa-clock-rotate-left" style="color: #ec944c;"></i>
-                <span class="nav-label">HISTORY</span>
+            <button type="button" class="nav-btn nav-inactive flex flex-col items-center justify-center rounded-[24px] px-4 py-2 transition-all" data-tab="history" onclick="showTab('history')">
+                <span class="material-symbols-outlined">history</span>
+                <span class="text-[11px] font-semibold uppercase tracking-[0.18em] mt-1">History</span>
             </button>
-                <i class="fa-solid fa-gear nav-icon"></i>
-                <i class="fa-solid fa-gear" style="color: #ec944c;"></i>
-                <span class="nav-label">SETTINGS</span>
+            <button type="button" class="nav-btn nav-inactive flex flex-col items-center justify-center rounded-[24px] px-4 py-2 transition-all" data-tab="settings" onclick="showTab('settings')">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="text-[11px] font-semibold uppercase tracking-[0.18em] mt-1">Settings</span>
             </button>
         </div>
-    </div>
+    </nav>
 
     <script src="./scripts.js"></script>
 </body>
