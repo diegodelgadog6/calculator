@@ -65,13 +65,14 @@ body {
     flex: 1;
     overflow-y: auto;
     display: flex;
+    padding-bottom: 8px;
 }
 
 .tab {
     width: 100%;
     display: none;
     flex-direction: column;
-    padding: 16px;
+    padding: 0;
     overflow-y: auto;
 }
 
@@ -80,12 +81,12 @@ body {
 }
 
 #calculator-tab {
-    padding: 0;
+    padding: 0 0 12px;
     flex-direction: column;
 }
 
 .display-section {
-    padding: 36px 20px 24px;
+    padding: 26px 26px 18px;
     text-align: right;
     flex-shrink: 0;
 }
@@ -99,7 +100,7 @@ body {
 }
 
 .result-display {
-    font-size: 74px;
+    font-size: 96px;
     font-weight: 700;
     color: #fff;
     word-wrap: break-word;
@@ -111,21 +112,21 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
-    padding: 14px;
+    padding: 18px;
     flex: 1;
     background: linear-gradient(180deg, rgba(10, 12, 18, 0.95) 0%, rgba(6, 8, 12, 0.98) 100%);
     border-radius: 28px;
-    margin: 0 10px 10px;
+    margin: 0 16px;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 20px 40px rgba(0, 0, 0, 0.45);
 }
 
 .btn {
-    min-height: 76px;
+    min-height: 116px;
     border: none;
-    border-radius: 18px;
+    border-radius: 22px;
     font-size: 24px;
     font-weight: 600;
-    background: #1a1d22;
+    background: #1a1c20;
     color: #fff;
     cursor: pointer;
     transition: all 0.2s;
@@ -144,7 +145,7 @@ body {
 }
 
 .btn-function {
-    background: #4c5055;
+    background: #50545b;
     color: #fff;
 }
 
@@ -153,7 +154,7 @@ body {
 }
 
 .btn-operation {
-    background: #4f2e21;
+    background: #563225;
     color: #ec944c;
 }
 
@@ -176,16 +177,90 @@ body {
     grid-column: span 2;
 }
 
+.recent-history {
+    padding: 30px 16px 0;
+}
+
+.recent-title {
+    color: #8f8f95;
+    font-size: 40px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.recent-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.recent-card {
+    min-height: 126px;
+    border-radius: 18px;
+    background: linear-gradient(100deg, #212326 0%, #101216 100%);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.recent-expression {
+    color: #a4a6ab;
+    font-size: 18px;
+}
+
+.recent-result {
+    color: #fff;
+    font-size: 48px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.recent-view-all {
+    border: 0;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #9f9fa5;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: 0.2s;
+}
+
+.recent-view-all i {
+    color: #ec944c;
+    font-size: 26px;
+}
+
+.recent-view-all span {
+    font-size: 24px;
+}
+
+.recent-view-all:hover {
+    color: #d9d9de;
+}
+
+.history-topline {
+    color: #71737a;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin: 28px 30px 6px;
+}
+
 .history-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
-    padding: 8px 10px 0;
+    padding: 0 30px;
 }
 
 .history-header h2 {
-    font-size: 56px;
+    font-size: 64px;
     font-weight: 700;
     line-height: 1;
 }
@@ -217,7 +292,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 0 10px 90px;
+    padding: 0 22px 90px;
 }
 
 .activity-section {
@@ -284,7 +359,9 @@ body {
     align-items: center;
     background: #080a0f;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 14px 12px 20px;
+    padding: 14px 12px 18px;
+    margin: 0 0 4px;
+    border-radius: 22px 22px 0 0;
 }
 
 .nav-btn {
@@ -296,20 +373,20 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    padding: 10px 18px;
+    padding: 12px 18px;
     transition: color 0.2s, background 0.2s;
     border-radius: 999px;
-    min-width: 112px;
+    min-width: 114px;
 }
 
 .nav-btn .nav-icon {
-    font-size: 26px;
+    font-size: 28px;
 }
 
 .nav-btn .nav-label {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 1.6px;
 }
 
 .nav-btn.active {
@@ -339,4 +416,47 @@ body {
 .content::-webkit-scrollbar-thumb:hover,
 .activity-log::-webkit-scrollbar-thumb:hover {
     background: #666;
+}
+
+@media (max-width: 620px) {
+    body {
+        padding: 0;
+    }
+
+    .app-container {
+        max-width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .result-display {
+        font-size: 68px;
+    }
+
+    .btn {
+        min-height: 86px;
+        border-radius: 18px;
+    }
+
+    .recent-title {
+        font-size: 34px;
+    }
+
+    .recent-result {
+        font-size: 40px;
+    }
+
+    .recent-view-all span {
+        font-size: 18px;
+    }
+
+    .nav-btn {
+        min-width: 96px;
+        padding: 10px 10px;
+    }
+
+    .nav-btn .nav-label {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
 }

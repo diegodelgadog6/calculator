@@ -9,6 +9,7 @@ function loadHistory() {
     if (saved) {
         history = JSON.parse(saved);
     }
+    updateRecentHistory();
 }
 
 function saveHistory() {
@@ -133,6 +134,22 @@ function addToHistory(expression, result) {
     }
     saveHistory();
     updateHistoryDisplay();
+    updateRecentHistory();
+}
+
+function updateRecentHistory() {
+    const recentExpression = document.getElementById('recent-expression');
+    const recentResult = document.getElementById('recent-result');
+    if (!recentExpression || !recentResult) {
+        return;
+    }
+    if (history.length === 0) {
+        recentExpression.textContent = 'Sin operaciones';
+        recentResult.textContent = '0';
+        return;
+    }
+    recentExpression.textContent = history[0].expression;
+    recentResult.textContent = formatNumber(String(history[0].result));
 }
 
 function updateHistoryDisplay() {
@@ -182,6 +199,7 @@ function clearHistory() {
         history = [];
         localStorage.removeItem('calcHistory');
         updateHistoryDisplay();
+        updateRecentHistory();
     }
 }
 
@@ -210,6 +228,7 @@ window.addEventListener('DOMContentLoaded', () => {
     loadHistory();
     updateDisplay();
     updateHistoryDisplay();
+    updateRecentHistory();
 });
 
 
